@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://vof3rwqfx65g"]
+
+[ext_resource type="Texture2D" uid="uid://b5cxevlv7wwiy" path="res://texts/icon_atlas.png" id="1_kfw7l"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ilh8b"]
+atlas = ExtResource("1_kfw7l")
+region = Rect2(851, 11, 118, 119)
+
+[node name="AtlasCheck" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_right = 123.0
+offset_bottom = 126.0
+icon = SubResource("AtlasTexture_ilh8b")
+flat = true

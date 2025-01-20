@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://b3c80riu82m4e"]
+
+[node name="Label" type="RichTextLabel"]
+z_index = 4
+z_as_relative = false
+offset_right = 295.0
+offset_bottom = 50.0
+mouse_filter = 1
+bbcode_enabled = true
+text = "[color=green]lorem[/color] [color=red]ipsum[/color]"
+fit_content = true
+scroll_active = false
+metadata/outcome_chances = ""
+
+[node name="LabelBG" type="ColorRect" parent="."]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+color = Color(0.114897, 0.114897, 0.114897, 1)

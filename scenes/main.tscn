@@ -1,0 +1,277 @@
+[gd_scene load_steps=17 format=3 uid="uid://ub20urrdtgxr"]
+
+[ext_resource type="Script" path="res://src/main_ui.gd" id="1_emyg6"]
+[ext_resource type="LabelSettings" uid="uid://cumcti2eu1bar" path="res://themes/Label1.tres" id="2_a8ry0"]
+[ext_resource type="Script" path="res://src/item_list.gd" id="2_rkj76"]
+[ext_resource type="Texture2D" uid="uid://b5cxevlv7wwiy" path="res://texts/icon_atlas.png" id="3_62gf1"]
+[ext_resource type="PackedScene" uid="uid://pmuyfvsfsmp0" path="res://scenes/line.tscn" id="3_bsk8p"]
+[ext_resource type="Texture2D" uid="uid://da3xk7hskdx1c" path="res://texts/orbe.PNG" id="3_t21no"]
+[ext_resource type="Script" path="res://src/puit_controller.gd" id="4_5e6rd"]
+[ext_resource type="Script" path="res://src/mouse_follow.gd" id="4_nienn"]
+[ext_resource type="Script" path="res://src/item_controller.gd" id="5_s01te"]
+[ext_resource type="Script" path="res://src/button_controller.gd" id="6_fg38u"]
+[ext_resource type="PackedScene" uid="uid://b3c80riu82m4e" path="res://scenes/historique_label.tscn" id="8_pldpe"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fh40c"]
+atlas = ExtResource("3_62gf1")
+region = Rect2(979, 28, 97, 101)
+filter_clip = true
+
+[sub_resource type="LabelSettings" id="LabelSettings_kl0b0"]
+font_size = 18
+
+[sub_resource type="LabelSettings" id="LabelSettings_43ht7"]
+font_size = 18
+
+[sub_resource type="LabelSettings" id="LabelSettings_dqc4l"]
+font_size = 22
+
+[sub_resource type="LabelSettings" id="LabelSettings_h5hs4"]
+font_size = 22
+
+[node name="BG" type="ColorRect"]
+anchors_preset = -1
+anchor_top = 0.002
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -0.296
+offset_bottom = 9.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.0
+mouse_filter = 1
+color = Color(0.212305, 0.212305, 0.212305, 1)
+
+[node name="FMPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.04
+anchor_top = 0.05
+anchor_right = 0.953
+anchor_bottom = 0.939
+offset_left = -0.0800018
+offset_top = 0.200001
+offset_right = 0.143921
+offset_bottom = 0.0159302
+mouse_filter = 1
+script = ExtResource("1_emyg6")
+
+[node name="Item" type="Control" parent="FMPanel"]
+layout_mode = 1
+anchor_left = 0.016
+anchor_top = 0.031
+anchor_right = 0.209
+anchor_bottom = 0.184
+offset_left = 0.167999
+offset_top = -7.678
+offset_right = 121.132
+offset_bottom = -7.87701
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ItemName" type="Label" parent="FMPanel/Item"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.042
+anchor_right = 0.972
+anchor_bottom = 1.0
+offset_left = 95.392
+offset_top = 2.64
+offset_right = 0.071991
+offset_bottom = -58.36
+text = "<- click to chose an item plzplzplzplz"
+label_settings = ExtResource("2_a8ry0")
+
+[node name="ItemButton" type="Button" parent="FMPanel/Item"]
+layout_mode = 0
+offset_right = 108.0
+offset_bottom = 108.0
+scale = Vector2(0.9, 0.9)
+focus_mode = 0
+icon = SubResource("AtlasTexture_fh40c")
+flat = true
+
+[node name="Runes" type="Control" parent="FMPanel"]
+layout_mode = 1
+anchor_left = 0.314
+anchor_top = 0.16
+anchor_right = 0.856
+anchor_bottom = 0.952
+offset_left = -30.328
+offset_top = -0.279999
+offset_right = 0.487976
+offset_bottom = -0.0159302
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Scroll" type="ScrollContainer" parent="FMPanel/Runes"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LinesSpace" type="VBoxContainer" parent="FMPanel/Runes/Scroll"]
+custom_minimum_size = Vector2(550, 0)
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="ResetJet" type="Button" parent="FMPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.99
+anchor_right = 0.99
+anchor_bottom = 0.015
+offset_left = -74.48
+offset_top = 9.0
+offset_right = 0.52002
+offset_bottom = 77.255
+focus_mode = 0
+icon = ExtResource("3_t21no")
+expand_icon = true
+
+[node name="Puit" type="Control" parent="FMPanel"]
+layout_mode = 1
+anchor_left = 0.032
+anchor_top = 0.033
+anchor_right = 0.032
+anchor_bottom = 0.033
+offset_left = 95.336
+offset_top = 43.761
+offset_right = 178.336
+offset_bottom = 143.761
+
+[node name="Poid" type="Control" parent="FMPanel/Puit"]
+anchors_preset = 0
+offset_left = -4.0
+offset_top = -10.0
+offset_right = 36.0
+offset_bottom = 30.0
+
+[node name="PoidC" type="Label" parent="FMPanel/Puit/Poid"]
+layout_mode = 0
+offset_left = 53.0
+offset_top = -10.0
+offset_right = 93.0
+offset_bottom = 16.0
+text = "0"
+label_settings = SubResource("LabelSettings_kl0b0")
+autowrap_mode = 2
+metadata/_edit_lock_ = true
+
+[node name="PoidLabel" type="Label" parent="FMPanel/Puit/Poid"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = -9.97
+offset_right = 47.0
+offset_bottom = 16.03
+text = "Poid :"
+label_settings = SubResource("LabelSettings_43ht7")
+metadata/_edit_lock_ = true
+
+[node name="Puit" type="Control" parent="FMPanel/Puit"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_lock_ = true
+
+[node name="PuitC" type="Label" parent="FMPanel/Puit/Puit"]
+layout_mode = 0
+offset_left = 97.735
+offset_top = 11.0
+offset_right = 193.735
+offset_bottom = 88.0
+text = "0"
+label_settings = SubResource("LabelSettings_dqc4l")
+metadata/_edit_lock_ = true
+
+[node name="PuitLabel" type="Label" parent="FMPanel/Puit/Puit"]
+layout_mode = 0
+offset_left = -5.0
+offset_top = 10.0
+offset_right = 77.0
+offset_bottom = 44.0
+text = "Reliquat :"
+label_settings = SubResource("LabelSettings_h5hs4")
+metadata/_edit_lock_ = true
+
+[node name="Historique" type="Control" parent="FMPanel"]
+layout_mode = 1
+anchor_left = 0.029
+anchor_top = 0.304
+anchor_right = 0.247
+anchor_bottom = 0.911
+offset_left = -0.507998
+offset_top = -0.231995
+offset_right = 0.156006
+offset_bottom = -0.112976
+mouse_filter = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="FMPanel/Historique"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.083
+anchor_bottom = 1.0
+offset_right = -0.0900116
+grow_horizontal = 2
+grow_vertical = 2
+follow_focus = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="FMPanel/Historique/ScrollContainer"]
+custom_minimum_size = Vector2(230, 0)
+layout_direction = 1
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 2
+
+[node name="Label" type="Label" parent="FMPanel/Historique/ScrollContainer/VBoxContainer"]
+self_modulate = Color(1, 1, 1, 0.337255)
+layout_mode = 2
+text = "hover fm history messages
+to see past succes chances"
+
+[node name="MouseFollow" type="Label" parent="FMPanel"]
+visible = false
+z_index = 4
+layout_mode = 0
+offset_right = 98.0
+offset_bottom = 23.0
+text = "lorem ipsum"
+script = ExtResource("4_nienn")
+
+[node name="PuitController" type="Node" parent="."]
+script = ExtResource("4_5e6rd")
+
+[node name="ItemController" type="Node" parent="."]
+script = ExtResource("5_s01te")
+line = ExtResource("3_bsk8p")
+
+[node name="ButtonController" type="Node" parent="."]
+script = ExtResource("6_fg38u")
+bg_base_color = Color(0.180392, 0.180392, 0.180392, 1)
+bg_plus_color = Color(0.196078, 0.545098, 0, 0.305882)
+bg_minus_color = Color(0.619608, 0, 0, 0.27451)
+historique_label = ExtResource("8_pldpe")
+
+[node name="Items" type="Node" parent="."]
+script = ExtResource("2_rkj76")
+
+[node name="ItemPopup" type="PopupPanel" parent="."]
+disable_3d = true
+title = "item list"
+position = Vector2i(73, 75)
+borderless = false
+
+[node name="GridContainer" type="GridContainer" parent="ItemPopup"]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 96.0
+offset_bottom = 96.0
+columns = 8
+
+[connection signal="pressed" from="FMPanel/Item/ItemButton" to="FMPanel" method="item_button_master"]
+[connection signal="pressed" from="FMPanel/ResetJet" to="ItemController" method="reset_loaded_item_jet"]
+[connection signal="mouse_exited" from="FMPanel/Historique" to="FMPanel/MouseFollow" method="exit_histo"]
+[connection signal="popup_hide" from="ItemPopup" to="FMPanel" method="close_popup"]
