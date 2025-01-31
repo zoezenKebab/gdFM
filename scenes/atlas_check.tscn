@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://vof3rwqfx65g"]
 
-[ext_resource type="Texture2D" uid="uid://b5cxevlv7wwiy" path="res://texts/icon_atlas.png" id="1_kfw7l"]
+[ext_resource type="Texture2D" uid="uid://c37rm74plljsj" path="res://texts/atlas_items.png" id="1_pahdf"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ilh8b"]
-atlas = ExtResource("1_kfw7l")
-region = Rect2(851, 11, 118, 119)
+[sub_resource type="AtlasTexture" id="AtlasTexture_6uswe"]
+atlas = ExtResource("1_pahdf")
+region = Rect2(668, 1, 71, 71)
 
 [node name="AtlasCheck" type="Control"]
 layout_mode = 3
@@ -16,7 +16,7 @@ grow_vertical = 2
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
-offset_right = 123.0
-offset_bottom = 126.0
-icon = SubResource("AtlasTexture_ilh8b")
+offset_right = 25.0
+offset_bottom = 24.0
+icon = SubResource("AtlasTexture_6uswe")
 flat = true

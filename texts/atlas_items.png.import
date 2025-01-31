@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://brokids06g6u1"
-path="res://.godot/imported/orbe.PNG-5150ec4f66e099e0e3a488c22236fe83.ctex"
+uid="uid://c37rm74plljsj"
+path="res://.godot/imported/atlas_items.png-1813832594017af47c44ec1653036875.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://texts/orbe.PNG"
-dest_files=["res://.godot/imported/orbe.PNG-5150ec4f66e099e0e3a488c22236fe83.ctex"]
+source_file="res://texts/atlas_items.png"
+dest_files=["res://.godot/imported/atlas_items.png-1813832594017af47c44ec1653036875.ctex"]
 
 [params]
 

@@ -1,21 +1,21 @@
-[gd_scene load_steps=17 format=3 uid="uid://ub20urrdtgxr"]
+[gd_scene load_steps=18 format=3 uid="uid://ub20urrdtgxr"]
 
 [ext_resource type="Script" path="res://src/main_ui.gd" id="1_emyg6"]
 [ext_resource type="LabelSettings" uid="uid://cumcti2eu1bar" path="res://themes/Label1.tres" id="2_a8ry0"]
 [ext_resource type="Script" path="res://src/item_list.gd" id="2_rkj76"]
-[ext_resource type="Texture2D" uid="uid://b5cxevlv7wwiy" path="res://texts/icon_atlas.png" id="3_62gf1"]
 [ext_resource type="PackedScene" uid="uid://pmuyfvsfsmp0" path="res://scenes/line.tscn" id="3_bsk8p"]
-[ext_resource type="Texture2D" uid="uid://da3xk7hskdx1c" path="res://texts/orbe.PNG" id="3_t21no"]
 [ext_resource type="Script" path="res://src/puit_controller.gd" id="4_5e6rd"]
 [ext_resource type="Script" path="res://src/mouse_follow.gd" id="4_nienn"]
+[ext_resource type="Texture2D" uid="uid://brokids06g6u1" path="res://texts/orbe.PNG" id="5_otu62"]
 [ext_resource type="Script" path="res://src/item_controller.gd" id="5_s01te"]
 [ext_resource type="Script" path="res://src/button_controller.gd" id="6_fg38u"]
+[ext_resource type="Texture2D" uid="uid://dwi5w5itqhnst" path="res://texts/orbe_play.PNG" id="6_xr2ah"]
 [ext_resource type="PackedScene" uid="uid://b3c80riu82m4e" path="res://scenes/historique_label.tscn" id="8_pldpe"]
+[ext_resource type="Texture2D" uid="uid://c37rm74plljsj" path="res://texts/atlas_items.png" id="12_cpdqa"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fh40c"]
-atlas = ExtResource("3_62gf1")
-region = Rect2(979, 28, 97, 101)
-filter_clip = true
+[sub_resource type="AtlasTexture" id="AtlasTexture_52niv"]
+atlas = ExtResource("12_cpdqa")
+region = Rect2(1, 1, 73, 73)
 
 [sub_resource type="LabelSettings" id="LabelSettings_kl0b0"]
 font_size = 18
@@ -35,7 +35,6 @@ anchor_top = 0.002
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -0.296
-offset_bottom = 9.0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.0
 mouse_filter = 1
@@ -78,28 +77,35 @@ offset_left = 95.392
 offset_top = 2.64
 offset_right = 0.071991
 offset_bottom = -58.36
-text = "<- click to chose an item plzplzplzplz"
+text = "<- cliquez pour choisir un item plzplzplzplz"
 label_settings = ExtResource("2_a8ry0")
 
 [node name="ItemButton" type="Button" parent="FMPanel/Item"]
-layout_mode = 0
-offset_right = 108.0
-offset_bottom = 108.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.049
+anchor_top = 0.056
+anchor_right = 0.274
+anchor_bottom = 0.056
+offset_left = 0.124
+offset_top = 0.0160007
+offset_right = 8.22399
+offset_bottom = 81.016
 scale = Vector2(0.9, 0.9)
 focus_mode = 0
-icon = SubResource("AtlasTexture_fh40c")
+icon = SubResource("AtlasTexture_52niv")
 flat = true
 
 [node name="Runes" type="Control" parent="FMPanel"]
 layout_mode = 1
-anchor_left = 0.314
+anchor_left = 0.285
 anchor_top = 0.16
-anchor_right = 0.856
+anchor_right = 0.285
 anchor_bottom = 0.952
-offset_left = -30.328
-offset_top = -0.279999
-offset_right = 0.487976
-offset_bottom = -0.0159302
+offset_left = 0.179962
+offset_top = -0.280014
+offset_right = 617.18
+offset_bottom = -0.679199
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -112,24 +118,10 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="LinesSpace" type="VBoxContainer" parent="FMPanel/Runes/Scroll"]
-custom_minimum_size = Vector2(550, 0)
+custom_minimum_size = Vector2(560, 0)
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
-
-[node name="ResetJet" type="Button" parent="FMPanel"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.99
-anchor_right = 0.99
-anchor_bottom = 0.015
-offset_left = -74.48
-offset_top = 9.0
-offset_right = 0.52002
-offset_bottom = 77.255
-focus_mode = 0
-icon = ExtResource("3_t21no")
-expand_icon = true
 
 [node name="Puit" type="Control" parent="FMPanel"]
 layout_mode = 1
@@ -241,6 +233,121 @@ offset_bottom = 23.0
 text = "lorem ipsum"
 script = ExtResource("4_nienn")
 
+[node name="ExoButtons" type="Control" parent="FMPanel"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ExoPanel" type="Panel" parent="FMPanel/ExoButtons"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.577
+anchor_top = 0.157
+anchor_right = 0.899
+anchor_bottom = 0.948
+offset_left = 136.996
+offset_top = -0.274841
+offset_right = 0.252075
+offset_bottom = -0.0990601
+mouse_filter = 2
+
+[node name="Exo" type="Button" parent="FMPanel/ExoButtons"]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.467
+anchor_top = 0.139
+anchor_right = 0.467
+anchor_bottom = 0.139
+offset_left = -0.283936
+offset_top = -70.037
+offset_right = 69.7161
+offset_bottom = -0.0370026
+grow_horizontal = 2
+focus_mode = 0
+text = "exo"
+
+[node name="ExoOK" type="Button" parent="FMPanel/ExoButtons"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.467
+anchor_top = 0.136
+anchor_right = 0.467
+anchor_bottom = 0.136
+offset_left = 83.7161
+offset_top = -48.288
+offset_right = 139.716
+offset_bottom = -17.288
+grow_horizontal = 2
+focus_mode = 0
+text = "dew it"
+
+[node name="Menu" type="Control" parent="FMPanel"]
+layout_mode = 1
+anchor_left = 0.032
+anchor_top = 0.209
+anchor_right = 0.032
+anchor_bottom = 0.209
+offset_left = 0.336002
+offset_top = -5.17479
+offset_right = 161.336
+offset_bottom = 44.8252
+
+[node name="Panel" type="Panel" parent="FMPanel/Menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ResetJet" type="Button" parent="FMPanel/Menu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.031
+anchor_bottom = -0.031
+offset_right = 50.0
+offset_bottom = 50.0
+tooltip_text = "relance le jet de l'item en cours de fm"
+focus_mode = 0
+disabled = true
+icon = ExtResource("5_otu62")
+expand_icon = true
+
+[node name="SessionButton" type="Button" parent="FMPanel/Menu"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 55.0
+offset_top = -1.55
+offset_right = 105.0
+offset_bottom = 48.45
+tooltip_text = "début d'enregistrement d'une session"
+focus_mode = 0
+disabled = true
+icon = ExtResource("6_xr2ah")
+expand_icon = true
+
+[node name="HOFButton" type="Button" parent="FMPanel/Menu"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 109.0
+offset_top = -1.55
+offset_right = 159.0
+offset_bottom = 48.45
+focus_mode = 0
+disabled = true
+text = "HoF"
+clip_text = true
+
 [node name="PuitController" type="Node" parent="."]
 script = ExtResource("4_5e6rd")
 
@@ -258,20 +365,21 @@ historique_label = ExtResource("8_pldpe")
 [node name="Items" type="Node" parent="."]
 script = ExtResource("2_rkj76")
 
-[node name="ItemPopup" type="PopupPanel" parent="."]
+[node name="WindowPopup" type="PopupPanel" parent="."]
 disable_3d = true
-title = "item list"
-position = Vector2i(73, 75)
+title = "lorem ipsum"
+position = Vector2i(84, 80)
+size = Vector2i(200, 40)
 borderless = false
 
-[node name="GridContainer" type="GridContainer" parent="ItemPopup"]
+[node name="GridContainer" type="GridContainer" parent="WindowPopup"]
 offset_left = 4.0
 offset_top = 4.0
-offset_right = 96.0
-offset_bottom = 96.0
+offset_right = 196.0
+offset_bottom = 36.0
 columns = 8
 
 [connection signal="pressed" from="FMPanel/Item/ItemButton" to="FMPanel" method="item_button_master"]
-[connection signal="pressed" from="FMPanel/ResetJet" to="ItemController" method="reset_loaded_item_jet"]
 [connection signal="mouse_exited" from="FMPanel/Historique" to="FMPanel/MouseFollow" method="exit_histo"]
-[connection signal="popup_hide" from="ItemPopup" to="FMPanel" method="close_popup"]
+[connection signal="pressed" from="FMPanel/Menu/ResetJet" to="ItemController" method="reset_loaded_item_jet"]
+[connection signal="popup_hide" from="WindowPopup" to="FMPanel" method="close_popup"]

@@ -28,7 +28,6 @@ const BUTTONS_DICT_MAP = {
 
 
 func rune_pressed(type_pressed : String, stat_name : String) -> void:
-	
 	#base/pa/ra rune
 	var type_to_add : Array = BUTTONS_DICT_MAP.get(type_pressed)
 	#the type of stat to bed added
@@ -69,7 +68,7 @@ func rune_pressed(type_pressed : String, stat_name : String) -> void:
 	
 	reliquat.get_child(1).get_child(0).text = str(p_controller.reliquat)
 	i_controller.update_total_weight()
-	create_historique(runes_to_change,took_reliquat)
+	create_historique(runes_to_change, took_reliquat, stat_name, type_pressed)
 
 
 func reset_previous_click()-> void:
@@ -119,11 +118,11 @@ func change_line_color(line_change : Control, change_amt : float)-> void:
 		stat_change.label_settings = base_label
 
 #creates a new label/bg of historique 
-func create_historique(actions : Dictionary, took_reliquat : int)-> void:
+func create_historique(actions : Dictionary, took_reliquat : int, click_stat : String, type_click : String)-> void:
 	var new_label = historique_label.instantiate()
 	
 	historique.get_child(0).get_child(0).add_child(new_label)
-	new_label.text = ""
+	new_label.text = "       "
 	var control_chances = "sc : " + str(p_controller.outcome_thresholds["sc"]) + "%, "
 	control_chances += "sn : " + str(p_controller.outcome_thresholds["sn"] - p_controller.outcome_thresholds["sc"]) + "%, "
 	control_chances += "ec : " + str(100 - p_controller.outcome_thresholds["sn"]) + "%"
@@ -146,6 +145,14 @@ func create_historique(actions : Dictionary, took_reliquat : int)-> void:
 	if took_reliquat == -1: new_label.text += "[color=red]-reliquat[/color]"
 	elif took_reliquat == 1:  new_label.text += "[color=green]+reliquat[/color]"
 	
+	new_label.get_child(1).size = new_label.size
+	var type_click_id : int = 0
+	match type_click:
+		"Base" : type_click_id = 0
+		"Pa" : type_click_id = 1
+		"Ra" : type_click_id = 2
+	i_controller.set_rune_icon(new_label.get_child(0), click_stat, type_click_id)
+	
 	#I wanna see my new label plzzz, (must wait for frame to process)
 	await get_tree().process_frame
 	historique.get_child(0).ensure_control_visible(new_label)
@@ -154,3 +161,14 @@ func delete_historique()-> void:
 	reliquat.get_child(1).get_child(0).text = "0"
 	for child in historique.get_child(0).get_child(0).get_children():
 		child.queue_free()
+
+func white_flash(button : Control, entered : bool)-> void:
+	if entered: button.get_child(0).modulate.v = 15
+	else: button.get_child(0).modulate.v = 1
+
+func confirm_click(button : Control)-> void:
+	button.scale = Vector2(0.9,0.9)
+	button.get_child(0).scale = Vector2(1.1,1.1)
+	await get_tree().create_timer(0.1).timeout
+	button.scale = Vector2(1,1)
+	button.get_child(0).scale = Vector2(1,1)

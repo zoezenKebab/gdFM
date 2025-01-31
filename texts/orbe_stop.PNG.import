@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://brokids06g6u1"
-path="res://.godot/imported/orbe.PNG-5150ec4f66e099e0e3a488c22236fe83.ctex"
+uid="uid://blqnat1kfx7x0"
+path="res://.godot/imported/orbe_stop.PNG-5185b18c2b33c7146826e70c80145776.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://texts/orbe.PNG"
-dest_files=["res://.godot/imported/orbe.PNG-5150ec4f66e099e0e3a488c22236fe83.ctex"]
+source_file="res://texts/orbe_stop.PNG"
+dest_files=["res://.godot/imported/orbe_stop.PNG-5185b18c2b33c7146826e70c80145776.ctex"]
 
 [params]
 

@@ -7,6 +7,7 @@ extends Node
 @onready var b_controller = get_parent().get_node("ButtonController")
 @onready var p_controller =  get_parent().get_node("PuitController")
 @onready var puit = get_parent().get_node("FMPanel/Puit")
+var runes_atlas = preload("res://texts/atlas_runes.png")
 
 var loaded_item_stats : Dictionary
 
@@ -14,8 +15,10 @@ var loaded_item_jet_theorique : Dictionary
 
 var item_weight : float = 0
 
-
 func load_item_stats(jet : Dictionary)-> void:
+	
+	
+	
 	reset_buttons()
 	
 	loaded_item_jet_theorique = jet
@@ -51,9 +54,6 @@ func load_item_stats(jet : Dictionary)-> void:
 		new_line.find_child("Current").find_child("StatName").text = globals.STATS_TABLE.get(stat)[0]
 		if is_stat_neg: new_line.find_child("Current").find_child("StatName").label_settings = bad_stat
 		
-		#pa/ra buttons
-		if globals.STATS_TABLE.get(stat)[2] == 0: new_line.find_child("Runes").find_child("Pa").queue_free()
-		if globals.STATS_TABLE.get(stat)[3] == 0: new_line.find_child("Runes").find_child("Ra").queue_free()
 		
 		#change change labels
 		new_line.find_child("Current").find_child("Change").text = ""
@@ -64,6 +64,21 @@ func load_item_stats(jet : Dictionary)-> void:
 		
 		#add line to item hud
 		space.add_child(new_line)
+		
+		#pa/ra buttons
+		if globals.STATS_TABLE.get(stat)[2] == 0: new_line.find_child("Runes").find_child("Pa").queue_free()
+		if globals.STATS_TABLE.get(stat)[3] == 0: new_line.find_child("Runes").find_child("Ra").queue_free()
+		
+		#await get_tree().create_timer(0.01).timeout
+		var i : int = 0
+		for rune_button in new_line.find_child("Runes").get_children():
+			
+			set_rune_icon(rune_button, stat, i)
+			i += 1
+			
+			rune_button.mouse_entered.connect(b_controller.white_flash.bind(rune_button, true))
+			rune_button.mouse_exited.connect(b_controller.white_flash.bind(rune_button, false))
+			rune_button.pressed.connect(b_controller.confirm_click.bind(rune_button))
 	
 	update_total_weight()
 
@@ -140,7 +155,7 @@ func reset_loaded_item_jet()-> void:
 				b_controller.reset_previous_click()
 				b_controller.delete_historique()
 				p_controller.reliquat = 0
-	get_total_weight(false)
+	update_total_weight()
 
 func reset_buttons()-> void:
 	if space.get_child_count() == 0: return
@@ -150,3 +165,26 @@ func reset_buttons()-> void:
 	p_controller.reliquat = 0
 	for child in space.get_children():
 		child.queue_free()
+
+
+func set_rune_icon(rune_control : Control, stat : String, type : int)-> void:
+	var rune_base_pos : Vector2i = find_atlas_key(stat, type)
+	
+	var button_atlas : AtlasTexture = AtlasTexture.new()
+	button_atlas.atlas = runes_atlas
+	button_atlas.region = Rect2(74 * (rune_base_pos.x) + 1, 74 * (rune_base_pos.y) + 1, 71,71)
+	if rune_control is Button: rune_control.icon = button_atlas
+	else: rune_control.texture = button_atlas
+
+func find_atlas_key(stat : String, offset : int)-> Vector2:
+	var i : int = 0
+	for key in globals.ATLAS_IDX_RUNES_OFFSETS:
+		if key == stat: 
+			i = globals.ATLAS_IDX_RUNES_OFFSETS[key] + offset
+			break
+	var line : int = (i / 13)
+	var column : int = i - ((line) *  13) - 1
+	if column == -1:
+		column = 12
+		line -= 1
+	return Vector2i(column,line)

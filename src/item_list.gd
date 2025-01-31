@@ -8,55 +8,75 @@ var i_list : Array = [
 	VOILE_D_ENCRE,
 	PATAUGASTRTIQUE,
 	BOUCLIER_CYCLOIDE,
-	EPEE_DIABLOTINE
+	EPEE_DIABLOTINE,
+	CEINTURE_BROUCE
 	]
 
 const AMULETTE_STRIGIDE : Dictionary = {
 	"name" : "Amulette du Strigide",
-	"icon_offset" : Vector2(8.5,14),
+	"icon_offset" : Vector2(75,1),
 	"jet" : AMULETTE_STRIGIDE_JET
 }
 
 const ANNEAU_PADGREF : Dictionary = {
 	"name" : "Anneau de Padgref",
-	"icon_offset" : Vector2(269,20),
+	"icon_offset" : Vector2(223,1),
 	"jet" : ANNEAU_PADGREF_JET
 }
 
 const CEINTURE_STRIGIDE : Dictionary = {
 	"name" : "Ceinture du Strigide",
-	"icon_offset" : Vector2(135,20),
+	"icon_offset" : Vector2(149,1),
 	"jet" : CEINTURE_STRIGIDE_JET
 }
 
 const BOTTES_PADGREF : Dictionary = {
 	"name" : "Getas de Padgref",
-	"icon_offset" : Vector2(390,20),
+	"icon_offset" : Vector2(297,1),
 	"jet" : BOTTES_PADGREF_JET
 }
 
 const VOILE_D_ENCRE : Dictionary = {
 	"name" : "Voile d'encre",
-	"icon_offset" : Vector2(500,20),
+	"icon_offset" : Vector2(371,1),
 	"jet" : VOILE_D_ENCRE_JET
 }
 
 const PATAUGASTRTIQUE : Dictionary = {
 	"name" : "Pataugastrique",
-	"icon_offset" : Vector2(625,23),
+	"icon_offset" : Vector2(445,1),
 	"jet" : PATAUGASTRIQUE_JET
 }
 
 const BOUCLIER_CYCLOIDE : Dictionary = {
 	"name" : "Bouclier du Cycloïde",
-	"icon_offset" : Vector2(740,24),
+	"icon_offset" : Vector2(519,1),
 	"jet" : BOUCLIER_CYCLOIDE_JET
 }
 
 const EPEE_DIABLOTINE : Dictionary = {
 	"name" : "Épée Diablotine",
-	"icon_offset" : Vector2(855,20),
+	"icon_offset" : Vector2(593,1),
 	"jet" : EPEE_DIABLOTINE_JET
+}
+
+const CEINTURE_BROUCE : Dictionary = {
+	"name" : "Ceinture de Brouce",
+	"icon_offset" : Vector2(668,1),
+	"jet" : CEINTURE_BROUCE_JET
+}
+
+const CEINTURE_BROUCE_JET : Dictionary = {
+	"vi" : [351,400],
+	"fo" : [71,100],
+	"sa" : [21,30],
+	"cri" : [4,6],
+	"PO" : [1,2],
+	"do_neutre" : [14,18],
+	"do_ter" : [14,18],
+	"re_neutre" : [11,15],
+	"re_pm" : [5,7],
+	"re_cri" : [11,15]
 }
 
 const EPEE_DIABLOTINE_JET : Dictionary = {

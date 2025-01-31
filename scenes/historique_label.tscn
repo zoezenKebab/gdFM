@@ -1,19 +1,39 @@
-[gd_scene format=3 uid="uid://b3c80riu82m4e"]
+[gd_scene load_steps=3 format=3 uid="uid://b3c80riu82m4e"]
+
+[ext_resource type="Texture2D" uid="uid://dongvhso8485e" path="res://texts/atlas_runes.png" id="1_nhe7m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_au5kc"]
+atlas = ExtResource("1_nhe7m")
+region = Rect2(449, 227, 70, 73)
 
 [node name="Label" type="RichTextLabel"]
 z_index = 4
 z_as_relative = false
-offset_right = 295.0
-offset_bottom = 50.0
+clip_contents = false
+custom_minimum_size = Vector2(135, 0)
+layout_direction = 2
+offset_right = 100.0
+offset_bottom = 23.0
+pivot_offset = Vector2(-25, 0)
 mouse_filter = 1
 bbcode_enabled = true
-text = "[color=green]lorem[/color] [color=red]ipsum[/color]"
+text = "       [color=green]lorem[/color] [color=red]ipsum[/color]"
 fit_content = true
 scroll_active = false
 metadata/outcome_chances = ""
 
+[node name="RuneText" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+offset_left = 2.0
+offset_right = 27.0
+offset_bottom = 25.0
+texture = SubResource("AtlasTexture_au5kc")
+expand_mode = 1
+
 [node name="LabelBG" type="ColorRect" parent="."]
 show_behind_parent = true
+z_as_relative = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

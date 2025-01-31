@@ -43,52 +43,46 @@ func calculate_outcome(stat_name : String, rune_type : Array)-> String:
 	
 	return outcome_key
 
-#max = 160
-#the more points the more chances of sc
-var stat_differential_pts = 40
-var rune_weight_pts = 60
-var line_weight_pts = 80
-var item_weight_pts = 40
-var is_exo_pts = 10
 
+const stat_diff_weight : int = 1
+const line_full_weight : int = 1
+const total_full_weight : int = 1
+const rune_weight_weight : int = 2
+var sum_weight : int = 0
 
 func update_outcome_thresholds(stat_name : String, rune_type : Array)-> void:
-	
+	sum_weight = stat_diff_weight + line_full_weight + total_full_weight + rune_weight_weight
 	#WARNING : if is exo = crash
 	var current_stat : float = i_controller.loaded_item_stats[stat_name]
 	var rune_stat : float = globals.STATS_TABLE[stat_name][rune_type[1]]
-	var differential_ratio : float = current_stat / rune_stat
-	var differential_directional_coeff : float = -0.02 if differential_ratio > 10.0 else -0.05
-	var stat_differential : float = differential_directional_coeff * (differential_ratio) + 1
-	#print("stat_differential = ", stat_differential)
+	var differential_ratio : float = current_stat / (rune_stat * 28.0)
+	var sc_1 : float = 1 - pow(2.0, -25 * (1 - differential_ratio)) if differential_ratio <= 0.99 else 0.35 / differential_ratio
+	#print("sc_1 = ", sc_1)
 	
-	var e : float = 2.71828
 	
-	var line_weight_ratio : float = i_controller.get_line_weight(stat_name, false) / i_controller.get_line_weight(stat_name, true)
-	var line_weight : float = e ** -(line_weight_ratio ** 2) / 0.98
-	#print("line_weight = ", line_weight)
+	var line_full_ratio : float = i_controller.get_line_weight(stat_name, false) / i_controller.get_line_weight(stat_name, true)
+	var sc_2 : float = 1 - pow(2.0, -25  * (1 - line_full_ratio)) if line_full_ratio == 0 else -0.1 / -line_full_ratio
+	#print("sc_2 = ", sc_2)
 	
-	var total_weight_ratio : float = i_controller.get_total_weight(false) / i_controller.get_total_weight(true)
-	var item_weight : float = e ** -(total_weight_ratio ** 2) / 1.28
-	#print("item_weight = ", item_weight)
+	var total_full_ratio : float = i_controller.get_total_weight(false) / i_controller.get_total_weight(true)
+	var sc_3 : float = 1 - pow(2.0, -25  * (1 - total_full_ratio)) if total_full_ratio <= 0.99 else -0.1 / -total_full_ratio
+	#print("sc_3 = ", sc_3)
 	
 	#TODO : is exo and so what 
-	var is_exo : bool = false
+	var _is_exo : bool = false
+	var _sc_exo : float = 1 if !_is_exo else 0.5
 	
-	var rune_weight_normalized : float = globals.STATS_TABLE[stat_name][rune_type[0]] * 0.02 + 0.1
-	#print("rune weight pts = ", rune_weight_normalized * rune_weight_pts)
+	var e : float = 2.71828
+	var rune_weight : float = globals.STATS_TABLE[stat_name][rune_type[0]]
+	var sc_4 : float = pow(e, -((rune_weight * rune_weight) / 2000))
+	#print("sc_4 = ", sc_4)
 	
-	#gets the total points for this click
-	var total_sc_pts : float = stat_differential * stat_differential_pts 
-	+ line_weight * line_weight_pts 
-	+ item_weight * item_weight_pts
-	+ rune_weight_normalized * rune_weight_pts
-	#print("total_pts = ", total_sc_pts)
-	var sc_chances : float = e ** (-((total_sc_pts - 230) ** 2) / 30400.0)
-	#print("sc chances = ", sc_chances)
+	var sc_final : float = sc_1 * sc_2 * sc_3 * sc_4
+	#print(sc_final)
+	var sn = 1 - pow(2, -20 * sc_final)
 	
-	outcome_thresholds["sc"] = int(sc_chances * 100)
-	outcome_thresholds["sn"] = int((sc_chances * -0.9 + 0.9) * 100)
+	outcome_thresholds["sc"] = int(sc_final * 100)
+	outcome_thresholds["sn"] = int(sn * 100)
 	#print(outcome_thresholds)
 
 
@@ -131,34 +125,43 @@ func pick_runes(weight_to_add : float)-> Array:
 	var took_reliquat : int = 0
 	var max_chances : float = 0
 	var pick_chances : Dictionary
+	
+	# calculates the pick chances of the runes
 	for stat_line in i_controller.loaded_item_stats:
-		if i_controller.loaded_item_stats.get(stat_line) == 0: continue
-		var single_line_weight = globals.STATS_TABLE.get(stat_line)[1]
+		# prevents picking on lines that are equal to 0
+		# by just skipping them and not adding them to the pick_chances dictionary
+		if i_controller.loaded_item_stats.get(stat_line) < 0: continue
 		
+		# the density of a single rune of the line
+		var single_line_weight : float = globals.STATS_TABLE.get(stat_line)[1]
+		
+		# the density of the added rune divided by the density of the line
 		var simple_weight_ratio : float = (weight_to_add / single_line_weight)
-		#print(simple_weight_ratio)
-		var flattened_weight : float = flatten(simple_weight_ratio)
-		#print(weight_to_add / single_line_weight)
-		#print(flattened_weight)
-		pick_chances[stat_line] = get_gaussian_chances((flattened_weight))
+		
+		## wtf
+		#var flattened_weight : float = flatten(simple_weight_ratio)
+		
+		# adds the pick chance to the dict
+		pick_chances[stat_line] = get_gaussian_chances((simple_weight_ratio))
+		
 		max_chances += pick_chances[stat_line]
 	
-
+	#print(pick_chances)
+	# normalize the pick chances so that they all add up to one
 	for pick_chance in pick_chances:
 		pick_chances[pick_chance] = normalize_chances(pick_chances.get(pick_chance), max_chances)
+	print(pick_chances)
 	
-	#print(pick_chances)
-	
-	var starting_reliquat = reliquat
+	var starting_reliquat : float = reliquat
 	var current_removed_weight : float = 0
 	current_removed_weight += reliquat
 	
-	#try to remove weight for as long as we can before exceeding equilibrium
+	# try to remove weight for as long as we can before exceeding equilibrium
 	while current_removed_weight < weight_to_add:
 		var round_seed : float = randf_range(0,1)
 		var sum_of_weight : float = 0
 		
-		#weight random picking algo
+		# weight random picking algo
 		for stat_pick_chance in pick_chances:
 			sum_of_weight += pick_chances.get(stat_pick_chance)
 			if round_seed <= sum_of_weight:
@@ -166,11 +169,11 @@ func pick_runes(weight_to_add : float)-> Array:
 				var picked_negative_raw_stat : float = - globals.STATS_TABLE.get(stat_pick_chance)[5]
 				var picked_weight : float = globals.STATS_TABLE.get(stat_pick_chance)[1]
 				
-				#stops from substrating below zero
-				#if stat is already near zero
+				# stops from substrating below zero
+				# if stat is already near zero
 				if i_controller.loaded_item_stats[stat_pick_chance] + picked_negative_raw_stat < 0:
 					break
-				#makes sure we don't remove too much at once
+				# makes sure we don't remove too much at once
 				if fm_results.get(stat_pick_chance)!= null:
 					if i_controller.loaded_item_stats[stat_pick_chance] + fm_results[stat_pick_chance] < 1:
 						break
@@ -197,9 +200,9 @@ func flatten(x : float)-> float:
 
 func get_gaussian_chances(x : float)-> float:
 	var e : float = 2.71828
-	var g_x : float = (cos(PI * (x * 2)) - 1) / -2
+	var g_x : float = (cos(PI * (x * 2) - 1) / 2)
 	#gaussian distribution
-	var f_x = e ** -(((x - 1.0) * (x - 1.0)) / 20.0)
+	var f_x = e ** -(((x - 1.0) * (x - 1.0)) / 30.0)
 	#output depending on value of x
 	var p_x : float = f_x if x >= 1 else g_x
 	return p_x

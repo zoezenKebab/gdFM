@@ -1,10 +1,11 @@
 extends Label
 
-
+#TODO : supprimer ce truc et passer w/ tooltips des messages
 
 
 func _process(delta: float) -> void:
-	position = get_viewport().get_mouse_position() + Vector2(-30,-40)
+	if visible:
+		position = get_viewport().get_mouse_position() + Vector2(-30,-40)
 
 func show_stats(hist_text : String) -> void:
 	show()

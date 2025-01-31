@@ -1,95 +1,178 @@
-[gd_scene load_steps=3 format=3 uid="uid://pmuyfvsfsmp0"]
+[gd_scene load_steps=8 format=3 uid="uid://pmuyfvsfsmp0"]
 
 [ext_resource type="LabelSettings" uid="uid://cy5jhwjjet0u" path="res://themes/StatBase.tres" id="1_en7ap"]
 [ext_resource type="LabelSettings" uid="uid://c6htxidjn037g" path="res://themes/StatMM.tres" id="1_sj2k2"]
+[ext_resource type="Texture2D" uid="uid://dongvhso8485e" path="res://texts/atlas_runes.png" id="3_o5066"]
+[ext_resource type="Texture2D" uid="uid://b1qgd3f0xfqhy" path="res://texts/rune_bg.png" id="4_qcnok"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uuhan"]
+atlas = ExtResource("3_o5066")
+region = Rect2(149, 223, 71, 71)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n542o"]
+atlas = ExtResource("3_o5066")
+region = Rect2(224, 224, 71, 71)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_irb5m"]
+atlas = ExtResource("3_o5066")
+region = Rect2(298, 224, 71, 71)
 
 [node name="Line" type="Control"]
-custom_minimum_size = Vector2(400, 40)
+custom_minimum_size = Vector2(400, 49.385)
 layout_mode = 3
-anchors_preset = 0
-offset_right = 456.0
-offset_bottom = 40.0
+anchor_right = 0.526
+anchor_bottom = 0.071
+offset_right = 0.0479736
+offset_bottom = -0.00800323
 metadata/stat_name = ""
 
 [node name="LineBG" type="ColorRect" parent="."]
-layout_mode = 0
-offset_right = 439.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 0.913
+offset_top = 2.0
+offset_right = 435.0
+offset_bottom = 2.002
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0.180392, 0.180392, 0.180392, 1)
 
-[node name="MinMax" type="Label" parent="."]
+[node name="Container" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.395
+anchor_bottom = 1.0
+offset_right = -0.0100708
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HiddenSeparator" type="Panel" parent="Container"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(5, 0)
 layout_mode = 2
-offset_left = 19.175
-offset_top = 8.0
-offset_right = 88.175
-offset_bottom = 31.0
+mouse_filter = 2
+
+[node name="MinMax" type="Label" parent="Container"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
 text = "666 - 666"
 label_settings = ExtResource("1_sj2k2")
+horizontal_alignment = 1
 
-[node name="Current" type="Control" parent="."]
-anchors_preset = 0
-offset_left = 100.0
-offset_right = 140.0
-offset_bottom = 40.0
+[node name="Current" type="Control" parent="Container"]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
 
-[node name="Stat" type="Label" parent="Current"]
+[node name="Stat" type="Label" parent="Container/Current"]
 layout_mode = 2
 offset_left = 73.0
-offset_top = 8.0
+offset_top = 10.0
 offset_right = 101.0
-offset_bottom = 31.0
+offset_bottom = 33.0
 text = "666"
 label_settings = ExtResource("1_en7ap")
 
-[node name="StatName" type="Label" parent="Current"]
+[node name="StatName" type="Label" parent="Container/Current"]
 layout_mode = 2
 offset_left = 105.0
-offset_top = 8.0
+offset_top = 10.0
 offset_right = 207.0
-offset_bottom = 31.0
+offset_bottom = 33.0
 text = "Lorem ipsum"
 label_settings = ExtResource("1_en7ap")
 
-[node name="Change" type="Label" parent="Current"]
+[node name="Change" type="Label" parent="Container/Current"]
 layout_mode = 2
 offset_left = 286.905
-offset_top = 8.0
+offset_top = 10.0
 offset_right = 331.905
-offset_bottom = 31.0
+offset_bottom = 33.0
 text = " + 666"
 label_settings = ExtResource("1_en7ap")
 
-[node name="Runes" type="Control" parent="."]
-anchors_preset = 0
-offset_left = 450.0
-offset_right = 579.0
-offset_bottom = 40.0
-
-[node name="Base" type="Button" parent="Runes"]
-custom_minimum_size = Vector2(40, 0)
+[node name="RunesSeparator" type="ColorRect" parent="Container"]
+custom_minimum_size = Vector2(5, 0)
 layout_mode = 2
-offset_right = 40.0
-offset_bottom = 40.0
+color = Color(0.180392, 0.180392, 0.180392, 1)
+
+[node name="Runes" type="Control" parent="Container"]
+custom_minimum_size = Vector2(152, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Base" type="Button" parent="Container/Runes"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+anchor_right = 0.293
+anchor_bottom = 0.918
+offset_left = -0.5
+offset_right = -0.0360031
+offset_bottom = 0.0179977
+pivot_offset = Vector2(22.5, 22.5)
 focus_mode = 0
-text = "bas"
+icon = SubResource("AtlasTexture_uuhan")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="BG" type="TextureRect" parent="Container/Runes/Base"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(22.5, 22.5)
+texture = ExtResource("4_qcnok")
+
+[node name="Pa" type="Button" parent="Container/Runes"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+anchor_left = 0.339
+anchor_right = 0.635
+anchor_bottom = 0.918
+offset_left = -0.0280037
+offset_right = -0.0200043
+offset_bottom = 0.0179977
+pivot_offset = Vector2(22.5, 22.5)
+focus_mode = 0
+icon = SubResource("AtlasTexture_n542o")
+flat = true
+expand_icon = true
+
+[node name="BG" type="TextureRect" parent="Container/Runes/Pa"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(22.5, 22.5)
+texture = ExtResource("4_qcnok")
 metadata/_edit_lock_ = true
 
-[node name="Pa" type="Button" parent="Runes"]
-custom_minimum_size = Vector2(40, 0)
+[node name="Ra" type="Button" parent="Container/Runes"]
+custom_minimum_size = Vector2(45, 45)
 layout_mode = 2
-offset_left = 45.0
-offset_right = 85.0
-offset_bottom = 40.0
+anchor_left = 0.681
+anchor_right = 0.977
+anchor_bottom = 0.918
+offset_left = -0.0120087
+offset_right = -5.00401
+offset_bottom = -4.982
+pivot_offset = Vector2(22.5, 22.5)
 focus_mode = 0
-text = "pa"
-metadata/_edit_lock_ = true
+icon = SubResource("AtlasTexture_irb5m")
+flat = true
+expand_icon = true
 
-[node name="Ra" type="Button" parent="Runes"]
-custom_minimum_size = Vector2(40, 0)
-layout_mode = 2
-offset_left = 90.0
-offset_right = 130.0
-offset_bottom = 40.0
-focus_mode = 0
-text = "ra"
+[node name="BG" type="TextureRect" parent="Container/Runes/Ra"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(22.5, 22.5)
+texture = ExtResource("4_qcnok")
 metadata/_edit_lock_ = true
