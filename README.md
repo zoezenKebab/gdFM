@@ -2,7 +2,7 @@
 simulateur de forgemagie de Dofus
 
 features :
--8 items
+-9 items
 -historique de forgemagie
 -orbe regenerante
 
