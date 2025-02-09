@@ -14,4 +14,3 @@ func show_stats(hist_text : String) -> void:
 
 func exit_histo()-> void:
 	hide()
-	pass

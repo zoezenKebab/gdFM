@@ -3,7 +3,7 @@
 [ext_resource type="LabelSettings" uid="uid://cy5jhwjjet0u" path="res://themes/StatBase.tres" id="1_en7ap"]
 [ext_resource type="LabelSettings" uid="uid://c6htxidjn037g" path="res://themes/StatMM.tres" id="1_sj2k2"]
 [ext_resource type="Texture2D" uid="uid://dongvhso8485e" path="res://texts/atlas_runes.png" id="3_o5066"]
-[ext_resource type="Texture2D" uid="uid://b1qgd3f0xfqhy" path="res://texts/rune_bg.png" id="4_qcnok"]
+[ext_resource type="Theme" uid="uid://rui5fsry3hwo" path="res://themes/main_theme.tres" id="3_scy50"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uuhan"]
 atlas = ExtResource("3_o5066")
@@ -18,24 +18,33 @@ atlas = ExtResource("3_o5066")
 region = Rect2(298, 224, 71, 71)
 
 [node name="Line" type="Control"]
-custom_minimum_size = Vector2(400, 49.385)
+custom_minimum_size = Vector2(606, 49)
 layout_mode = 3
 anchor_right = 0.526
-anchor_bottom = 0.071
+anchor_bottom = 0.076
 offset_right = 0.0479736
-offset_bottom = -0.00800323
+offset_bottom = -3.248
 metadata/stat_name = ""
 
-[node name="LineBG" type="ColorRect" parent="."]
+[node name="Panel" type="Panel" parent="."]
 layout_mode = 1
-anchors_preset = -1
-anchor_bottom = 0.913
-offset_top = 2.0
-offset_right = 435.0
-offset_bottom = 2.002
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.180392, 0.180392, 0.180392, 1)
+theme = ExtResource("3_scy50")
+theme_type_variation = &"Line"
+
+[node name="Panel2" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_scy50")
+theme_type_variation = &"ChangePanel"
 
 [node name="Container" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -90,10 +99,11 @@ offset_bottom = 33.0
 text = " + 666"
 label_settings = ExtResource("1_en7ap")
 
-[node name="RunesSeparator" type="ColorRect" parent="Container"]
+[node name="RuneSeparator" type="Panel" parent="Container"]
+self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(5, 0)
 layout_mode = 2
-color = Color(0.180392, 0.180392, 0.180392, 1)
+theme = ExtResource("3_scy50")
 
 [node name="Runes" type="Control" parent="Container"]
 custom_minimum_size = Vector2(152, 0)
@@ -110,20 +120,10 @@ offset_right = -0.0360031
 offset_bottom = 0.0179977
 pivot_offset = Vector2(22.5, 22.5)
 focus_mode = 0
+theme = ExtResource("3_scy50")
 icon = SubResource("AtlasTexture_uuhan")
-flat = true
 icon_alignment = 1
 expand_icon = true
-
-[node name="BG" type="TextureRect" parent="Container/Runes/Base"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(22.5, 22.5)
-texture = ExtResource("4_qcnok")
 
 [node name="Pa" type="Button" parent="Container/Runes"]
 custom_minimum_size = Vector2(40, 40)
@@ -136,20 +136,10 @@ offset_right = -0.0200043
 offset_bottom = 0.0179977
 pivot_offset = Vector2(22.5, 22.5)
 focus_mode = 0
+theme = ExtResource("3_scy50")
+theme_type_variation = &"FlatButton"
 icon = SubResource("AtlasTexture_n542o")
-flat = true
 expand_icon = true
-
-[node name="BG" type="TextureRect" parent="Container/Runes/Pa"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(22.5, 22.5)
-texture = ExtResource("4_qcnok")
-metadata/_edit_lock_ = true
 
 [node name="Ra" type="Button" parent="Container/Runes"]
 custom_minimum_size = Vector2(45, 45)
@@ -162,17 +152,7 @@ offset_right = -5.00401
 offset_bottom = -4.982
 pivot_offset = Vector2(22.5, 22.5)
 focus_mode = 0
+theme = ExtResource("3_scy50")
+theme_type_variation = &"FlatButton"
 icon = SubResource("AtlasTexture_irb5m")
-flat = true
 expand_icon = true
-
-[node name="BG" type="TextureRect" parent="Container/Runes/Ra"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(22.5, 22.5)
-texture = ExtResource("4_qcnok")
-metadata/_edit_lock_ = true

@@ -3,18 +3,19 @@ extends Control
 @onready var wdw_popup = get_parent().find_child("WindowPopup")
 @onready var i_controller =  get_parent().find_child("ItemController")
 @onready var items = get_parent().find_child("Items")
-@onready var infos = get_child(0)
+@onready var infos = find_child("Item")
+@onready  var exos = find_child("ExoButtons")
 
 var items_atlas = preload("res://texts/atlas_items.png")
 
 
 func item_button_master()-> void:
 	wdw_popup.show()
-	wdw_popup.title = "item list"
+	wdw_popup.title = "OBJETS DISPONIBLES"
 	var i = 0
 	for item in items.i_list:
 		var item_button = Button.new()
-		item_button.flat = true
+		#item_button.flat = true
 		item_button.tooltip_text = item["name"]
 		
 		var button_atlas = AtlasTexture.new()
@@ -47,3 +48,9 @@ func open_item(item_dict_idx : int)-> void:
 	
 	close_popup()
 	pass
+
+func show_exo_panel()-> void:
+	if exos.get_child(0).is_visible():
+		exos.get_child(0).hide()
+	else:
+		exos.get_child(0).show()

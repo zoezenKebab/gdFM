@@ -1,11 +1,13 @@
-[gd_scene load_steps=18 format=3 uid="uid://ub20urrdtgxr"]
+[gd_scene load_steps=26 format=3 uid="uid://ub20urrdtgxr"]
 
 [ext_resource type="Script" path="res://src/main_ui.gd" id="1_emyg6"]
 [ext_resource type="LabelSettings" uid="uid://cumcti2eu1bar" path="res://themes/Label1.tres" id="2_a8ry0"]
 [ext_resource type="Script" path="res://src/item_list.gd" id="2_rkj76"]
 [ext_resource type="PackedScene" uid="uid://pmuyfvsfsmp0" path="res://scenes/line.tscn" id="3_bsk8p"]
+[ext_resource type="Texture2D" uid="uid://0tg5ueru0hyf" path="res://texts/bg_rune.png" id="3_itygs"]
 [ext_resource type="Script" path="res://src/puit_controller.gd" id="4_5e6rd"]
 [ext_resource type="Script" path="res://src/mouse_follow.gd" id="4_nienn"]
+[ext_resource type="Theme" uid="uid://rui5fsry3hwo" path="res://themes/main_theme.tres" id="4_ymmys"]
 [ext_resource type="Texture2D" uid="uid://brokids06g6u1" path="res://texts/orbe.PNG" id="5_otu62"]
 [ext_resource type="Script" path="res://src/item_controller.gd" id="5_s01te"]
 [ext_resource type="Script" path="res://src/button_controller.gd" id="6_fg38u"]
@@ -29,6 +31,30 @@ font_size = 22
 [sub_resource type="LabelSettings" id="LabelSettings_h5hs4"]
 font_size = 22
 
+[sub_resource type="Curve" id="Curve_8hjnd"]
+_data = [Vector2(0.59, 1), -25.0, -9.15197, 1, 1, Vector2(0.635628, 0.582418), -9.15197, -2.23929, 1, 1, Vector2(0.797571, 0.21978), -2.23929, -1.08571, 1, 1, Vector2(1, 0), -1.08571, 0.0, 1, 0]
+point_count = 4
+
+[sub_resource type="Curve" id="Curve_leca2"]
+_data = [Vector2(0, 1), 0.0, -1.9, 0, 1, Vector2(0.121457, 0.769231), -1.9, -2.34749, 1, 1, Vector2(0.271255, 0.417582), -2.34749, -1.0, 1, 1, Vector2(0.502024, 0.186813), -1.0, -0.355064, 1, 1, Vector2(1, 0.01), -0.355064, -1.9, 1, 1]
+point_count = 5
+
+[sub_resource type="Curve" id="Curve_jlxag"]
+_data = [Vector2(0, 1), 0.0, -2.71429, 0, 1, Vector2(0.174089, 0.527472), -2.71429, -1.28814, 1, 1, Vector2(0.412955, 0.21978), -1.28814, -0.0336946, 1, 1, Vector2(1, 0.2), -0.0336946, 0.0, 1, 0]
+point_count = 4
+
+[sub_resource type="Curve" id="Curve_dgtyt"]
+_data = [Vector2(0, 1), 0.0, -0.561576, 0, 1, Vector2(0.352227, 0.802198), -0.561576, -3.82785, 1, 1, Vector2(0.510121, 0.197802), -3.82785, -0.383365, 1, 1, Vector2(1, 0.01), -0.383365, 0.0, 1, 0]
+point_count = 4
+
+[sub_resource type="Curve" id="Curve_ru08m"]
+_data = [Vector2(0, 0), 0.0, 0.327586, 0, 1, Vector2(0.234818, 0.076923), 0.327586, 0.829365, 1, 1, Vector2(0.526316, 0.318681), 0.829365, 1.69087, 1, 1, Vector2(0.773279, 0.736264), 1.69087, 1.16327, 1, 1, Vector2(1, 1), 1.16327, 0.0, 1, 0]
+point_count = 5
+
+[sub_resource type="Curve" id="Curve_ybtxg"]
+_data = [Vector2(0, 0.15), 0.0, 2.25, 0, 1, Vector2(0.2, 0.6), 2.25, -0.666667, 1, 1, Vector2(0.5, 0.4), -0.666667, -0.8, 1, 1, Vector2(1, 0), -0.8, 0.0, 1, 0]
+point_count = 4
+
 [node name="BG" type="ColorRect"]
 anchors_preset = -1
 anchor_top = 0.002
@@ -38,7 +64,7 @@ offset_top = -0.296
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.0
 mouse_filter = 1
-color = Color(0.212305, 0.212305, 0.212305, 1)
+color = Color(0.092397, 0.0923971, 0.0923971, 1)
 
 [node name="FMPanel" type="Panel" parent="."]
 layout_mode = 1
@@ -52,7 +78,23 @@ offset_top = 0.200001
 offset_right = 0.143921
 offset_bottom = 0.0159302
 mouse_filter = 1
+theme = ExtResource("4_ymmys")
+theme_type_variation = &"BlackPanel"
 script = ExtResource("1_emyg6")
+
+[node name="TextureRect" type="TextureRect" parent="FMPanel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -242.0
+offset_top = 21.0
+offset_right = -18.9999
+offset_bottom = 176.0
+grow_horizontal = 0
+texture = ExtResource("3_itygs")
+expand_mode = 1
+stretch_mode = 4
 
 [node name="Item" type="Control" parent="FMPanel"]
 layout_mode = 1
@@ -85,16 +127,15 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.049
 anchor_top = 0.056
-anchor_right = 0.274
+anchor_right = 0.049
 anchor_bottom = 0.056
 offset_left = 0.124
 offset_top = 0.0160007
-offset_right = 8.22399
+offset_right = 81.124
 offset_bottom = 81.016
 scale = Vector2(0.9, 0.9)
 focus_mode = 0
 icon = SubResource("AtlasTexture_52niv")
-flat = true
 
 [node name="Runes" type="Control" parent="FMPanel"]
 layout_mode = 1
@@ -109,6 +150,17 @@ offset_bottom = -0.679199
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Panel" type="Panel" parent="FMPanel/Runes"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_type_variation = &"NeutralPanel"
+
 [node name="Scroll" type="ScrollContainer" parent="FMPanel/Runes"]
 layout_mode = 1
 anchors_preset = 15
@@ -116,6 +168,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("4_ymmys")
 
 [node name="LinesSpace" type="VBoxContainer" parent="FMPanel/Runes/Scroll"]
 custom_minimum_size = Vector2(560, 0)
@@ -170,13 +223,13 @@ metadata/_edit_lock_ = true
 
 [node name="PuitC" type="Label" parent="FMPanel/Puit/Puit"]
 layout_mode = 0
-offset_left = 97.735
+offset_left = 98.0
 offset_top = 11.0
-offset_right = 193.735
-offset_bottom = 88.0
-text = "0"
+offset_right = 154.0
+offset_bottom = 42.0
+text = "101.3"
 label_settings = SubResource("LabelSettings_dqc4l")
-metadata/_edit_lock_ = true
+clip_text = true
 
 [node name="PuitLabel" type="Label" parent="FMPanel/Puit/Puit"]
 layout_mode = 0
@@ -189,25 +242,37 @@ label_settings = SubResource("LabelSettings_h5hs4")
 metadata/_edit_lock_ = true
 
 [node name="Historique" type="Control" parent="FMPanel"]
+visible = false
 layout_mode = 1
 anchor_left = 0.029
 anchor_top = 0.304
-anchor_right = 0.247
+anchor_right = 0.26
 anchor_bottom = 0.911
-offset_left = -0.507998
-offset_top = -0.231995
-offset_right = 0.156006
-offset_bottom = -0.112976
+offset_left = -0.507996
+offset_top = 0.200302
+offset_right = 0.480011
+offset_bottom = 1.17596
 mouse_filter = 1
+
+[node name="Panel" type="Panel" parent="FMPanel/Historique"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("4_ymmys")
+theme_type_variation = &"NeutralPanel"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="FMPanel/Historique"]
 layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.083
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -0.0900116
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("4_ymmys")
 follow_focus = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="FMPanel/Historique/ScrollContainer"]
@@ -221,6 +286,7 @@ alignment = 2
 [node name="Label" type="Label" parent="FMPanel/Historique/ScrollContainer/VBoxContainer"]
 self_modulate = Color(1, 1, 1, 0.337255)
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "hover fm history messages
 to see past succes chances"
 
@@ -232,6 +298,16 @@ offset_right = 98.0
 offset_bottom = 23.0
 text = "lorem ipsum"
 script = ExtResource("4_nienn")
+
+[node name="Panel" type="Panel" parent="FMPanel/MouseFollow"]
+self_modulate = Color(1, 1, 1, 0.7)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="ExoButtons" type="Control" parent="FMPanel"]
 visible = false
@@ -248,14 +324,16 @@ visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.577
-anchor_top = 0.157
+anchor_top = 0.16
 anchor_right = 0.899
-anchor_bottom = 0.948
+anchor_bottom = 0.951
 offset_left = 136.996
-offset_top = -0.274841
-offset_right = 0.252075
-offset_bottom = -0.0990601
+offset_top = 0.000160217
+offset_right = 0.252014
+offset_bottom = 0.175903
 mouse_filter = 2
+theme = ExtResource("4_ymmys")
+theme_type_variation = &"NeutralPanel"
 
 [node name="Exo" type="Button" parent="FMPanel/ExoButtons"]
 custom_minimum_size = Vector2(70, 70)
@@ -271,7 +349,7 @@ offset_right = 69.7161
 offset_bottom = -0.0370026
 grow_horizontal = 2
 focus_mode = 0
-text = "exo"
+disabled = true
 
 [node name="ExoOK" type="Button" parent="FMPanel/ExoButtons"]
 layout_mode = 1
@@ -286,9 +364,10 @@ offset_right = 139.716
 offset_bottom = -17.288
 grow_horizontal = 2
 focus_mode = 0
-text = "dew it"
+disabled = true
 
 [node name="Menu" type="Control" parent="FMPanel"]
+visible = false
 layout_mode = 1
 anchor_left = 0.032
 anchor_top = 0.209
@@ -300,13 +379,11 @@ offset_right = 161.336
 offset_bottom = 44.8252
 
 [node name="Panel" type="Panel" parent="FMPanel/Menu"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -4.0
-offset_top = -4.0
-offset_right = 2.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -350,6 +427,12 @@ clip_text = true
 
 [node name="PuitController" type="Node" parent="."]
 script = ExtResource("4_5e6rd")
+rune_to_stat_curve = SubResource("Curve_8hjnd")
+line_fullness_curve = SubResource("Curve_leca2")
+rune_weight_curve = SubResource("Curve_jlxag")
+item_fullness_curve = SubResource("Curve_dgtyt")
+weights_curve = SubResource("Curve_ru08m")
+sn_curve = SubResource("Curve_ybtxg")
 
 [node name="ItemController" type="Node" parent="."]
 script = ExtResource("5_s01te")
@@ -358,8 +441,8 @@ line = ExtResource("3_bsk8p")
 [node name="ButtonController" type="Node" parent="."]
 script = ExtResource("6_fg38u")
 bg_base_color = Color(0.180392, 0.180392, 0.180392, 1)
-bg_plus_color = Color(0.196078, 0.545098, 0, 0.305882)
-bg_minus_color = Color(0.619608, 0, 0, 0.27451)
+bg_plus_color = Color(0.181984, 0.340927, 0.164257, 1)
+bg_minus_color = Color(0.571809, 0.251034, 0.192917, 1)
 historique_label = ExtResource("8_pldpe")
 
 [node name="Items" type="Node" parent="."]
@@ -368,18 +451,19 @@ script = ExtResource("2_rkj76")
 [node name="WindowPopup" type="PopupPanel" parent="."]
 disable_3d = true
 title = "lorem ipsum"
-position = Vector2i(84, 80)
+position = Vector2i(80, 80)
 size = Vector2i(200, 40)
+visible = true
 borderless = false
 
 [node name="GridContainer" type="GridContainer" parent="WindowPopup"]
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 196.0
-offset_bottom = 36.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 198.0
+offset_bottom = 38.0
 columns = 8
 
 [connection signal="pressed" from="FMPanel/Item/ItemButton" to="FMPanel" method="item_button_master"]
-[connection signal="mouse_exited" from="FMPanel/Historique" to="FMPanel/MouseFollow" method="exit_histo"]
+[connection signal="pressed" from="FMPanel/ExoButtons/Exo" to="FMPanel" method="show_exo_panel"]
 [connection signal="pressed" from="FMPanel/Menu/ResetJet" to="ItemController" method="reset_loaded_item_jet"]
 [connection signal="popup_hide" from="WindowPopup" to="FMPanel" method="close_popup"]

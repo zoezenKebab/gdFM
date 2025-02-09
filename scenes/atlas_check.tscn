@@ -4,7 +4,7 @@
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6uswe"]
 atlas = ExtResource("1_pahdf")
-region = Rect2(668, 1, 71, 71)
+region = Rect2(815, 0, 76, 78)
 
 [node name="AtlasCheck" type="Control"]
 layout_mode = 3

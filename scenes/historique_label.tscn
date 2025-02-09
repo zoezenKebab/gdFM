@@ -1,44 +1,70 @@
-[gd_scene load_steps=3 format=3 uid="uid://b3c80riu82m4e"]
+[gd_scene load_steps=5 format=3 uid="uid://b3c80riu82m4e"]
 
 [ext_resource type="Texture2D" uid="uid://dongvhso8485e" path="res://texts/atlas_runes.png" id="1_nhe7m"]
+[ext_resource type="Theme" uid="uid://rui5fsry3hwo" path="res://themes/main_theme.tres" id="2_6rj2a"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_au5kc"]
 atlas = ExtResource("1_nhe7m")
 region = Rect2(449, 227, 70, 73)
 
-[node name="Label" type="RichTextLabel"]
+[sub_resource type="Theme" id="Theme_8ityq"]
+default_font_size = 12
+
+[node name="LabelWhole" type="Control"]
+custom_minimum_size = Vector2(200, 30)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 200.0
+offset_bottom = 30.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.026
+anchor_bottom = 1.0
+offset_right = -1.20001
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RuneText" type="TextureRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+texture = SubResource("AtlasTexture_au5kc")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="HBoxContainer/VBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="RichTextLabel" parent="HBoxContainer/VBoxContainer"]
 z_index = 4
 z_as_relative = false
 clip_contents = false
-custom_minimum_size = Vector2(135, 0)
+custom_minimum_size = Vector2(170, 0)
 layout_direction = 2
-offset_right = 100.0
-offset_bottom = 23.0
-pivot_offset = Vector2(-25, 0)
+layout_mode = 2
 mouse_filter = 1
+theme = SubResource("Theme_8ityq")
 bbcode_enabled = true
-text = "       [color=green]lorem[/color] [color=red]ipsum[/color]"
+text = "[color=green]lorem[/color][color=red]ipsum[/color]"
 fit_content = true
 scroll_active = false
 metadata/outcome_chances = ""
 
-[node name="RuneText" type="TextureRect" parent="."]
-custom_minimum_size = Vector2(25, 25)
-layout_mode = 2
-offset_left = 2.0
-offset_right = 27.0
-offset_bottom = 25.0
-texture = SubResource("AtlasTexture_au5kc")
-expand_mode = 1
-
-[node name="LabelBG" type="ColorRect" parent="."]
+[node name="MsgBG" type="Panel" parent="."]
 show_behind_parent = true
-z_as_relative = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 1
-color = Color(0.114897, 0.114897, 0.114897, 1)
+mouse_filter = 2
+theme = ExtResource("2_6rj2a")
+theme_type_variation = &"HistoryPanel"

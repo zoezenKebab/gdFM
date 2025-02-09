@@ -2,14 +2,21 @@ extends Node
 
 var i_list : Array = [
 	AMULETTE_STRIGIDE, 
-	CEINTURE_STRIGIDE, 
+	CEINTURE_STRIGIDE,
+	BOTTES_STRIGIDE, 
 	ANNEAU_PADGREF, 
-	BOTTES_PADGREF, 
+	BOTTES_PADGREF,
+	COIFFE_PADGREF, 
 	VOILE_D_ENCRE,
 	PATAUGASTRTIQUE,
 	BOUCLIER_CYCLOIDE,
 	EPEE_DIABLOTINE,
-	CEINTURE_BROUCE
+	CEINTURE_BROUCE,
+	FEUILLE_PRINTEMPS,
+	DAGOULINANTES,
+	COLLIER_BAVDUR,
+	CHANT_NECROMANT,
+	JACKHIR_ARC
 	]
 
 const AMULETTE_STRIGIDE : Dictionary = {
@@ -64,6 +71,152 @@ const CEINTURE_BROUCE : Dictionary = {
 	"name" : "Ceinture de Brouce",
 	"icon_offset" : Vector2(668,1),
 	"jet" : CEINTURE_BROUCE_JET
+}
+
+const FEUILLE_PRINTEMPS : Dictionary = {
+	"name" : "La Feuille de Printemps",
+	"icon_offset" : Vector2(742,1),
+	"jet" : FEUILLE_PRINTEMPS_JET
+}
+
+const BOTTES_STRIGIDE : Dictionary = {
+	"name" : "Bottes du Strigide",
+	"icon_offset" : Vector2(149,76),
+	"jet" : BOTTES_STRIGIDE_JET
+}
+
+const DAGOULINANTES : Dictionary = {
+	"name" : "Dagoulinantes",
+	"icon_offset" : Vector2(74,75),
+	"jet" : DAGOULINANTES_JET
+}
+
+const JACKHIR_ARC : Dictionary = {
+	"name" : "Jakchir Arc",
+	"icon_offset" : Vector2(1,76),
+	"jet" : JAKCHIR_ARC_JET
+}
+
+const COLLIER_BAVDUR : Dictionary = {
+	"name" : "Collier de Bavdur",
+	"icon_offset" : Vector2(890,1),
+	"jet" : COLLIER_BAVDUR_JET
+}
+
+const COIFFE_PADGREF : Dictionary = {
+	"name" : "Coiffe de Padgref",
+	"icon_offset" : Vector2(223,75),
+	"jet" : COIFFE_PADGREF_JET
+}
+
+const CHANT_NECROMANT : Dictionary = {
+	"name" : "Chant du Nécromant",
+	"icon_offset" : Vector2(815,1),
+	"jet" : CHANT_NECROMANT_JET
+}
+
+const CHANT_NECROMANT_JET : Dictionary = {
+	"vi" : [301,350],
+	"fo" : [26,35],
+	"ine" : [26,35],
+	"cha" : [51,70],
+	"age" : [51,70],
+	"sa" : [21,30],
+	"PA" : [1,1],
+	"do_ter" : [4,6],
+	"do_feu" : [4,6],
+	"do_eau" : [9,12],
+	"do_air" : [9,12],
+	"re_per_ter" : [6,8],
+	"re_per_feu" : [6,8],
+	"re_per_eau" : [-4,-4],
+	"re_per_air" : [-4,-4],
+	"tac" : [3,4],
+	"fui" : [-8,-8],
+	"re_pa" : [-8,-8],
+	"re_pm" : [3,4],
+	"re_cri" : [7,10],
+	"re_pou" : [-20,-20]
+}
+
+const COIFFE_PADGREF_JET : Dictionary = {
+	"vi" : [101,150],
+	"ine" : [41,60],
+	"age" : [41,60],
+	"sa" : [31,50],
+	"cri" : [5,7],
+	"PO" : [1,1],
+	"do_feu" : [7,10],
+	"do_air" : [7,10],
+	"soin" : [6,8],
+	"prospe" : [7,10],
+	"ini" : [401, 500],
+	"re_per_ter" : [6,8],
+	"re_per_air" : [6,8],
+	"re_eau" : [8,12],
+	"tac" : [-10,-7],
+	"re_pm" : [-5,-4],
+	"do_cri" : [11,15]
+}
+
+const COLLIER_BAVDUR_JET : Dictionary = {
+	"vi" : [401,500],
+	"sa" : [31,40],
+	"PA" : [2,2],
+	"PO" : [-1,-1],
+	"ini" : [701,1000],
+	"re_per_neutre" : [2,3],
+	"re_per_ter" : [2,3],
+	"re_per_feu" : [2,3],
+	"re_per_eau" : [2,3],
+	"re_per_air" : [2,3],
+	"tac" : [16,20],
+	"re_pm" : [4,7]
+}
+
+const JAKCHIR_ARC_JET : Dictionary = {
+	"vi" : [101,150],
+	"cha" : [31,50],
+	"pui" : [16,20]
+}
+
+const DAGOULINANTES_JET : Dictionary = {
+	"vi" : [301,400],
+	"cha" : [61,80],
+	"sa" : [31,50],
+	"cri" : [4,6],
+	"PO" : [1,1],
+	"do_eau" : [16,20],
+	"re_per_neutre" : [5,7],
+	"re_per_feu" : [5,7],
+	"ret_pa" : [7,10]
+}
+
+const BOTTES_STRIGIDE_JET : Dictionary = {
+	"vi" : [351,400],
+	"sa" : [31,50],
+	"pui" : [51,75],
+	"PM" : [1,1],
+	"do_neutre" : [9,13],
+	"do_ter" : [9,13],
+	"do_feu" : [9,13],
+	"do_eau" : [9,13],
+	"do_air" : [9,13],
+	"re_per_feu" : [6,8],
+	"re_pa" : [6,8],
+	"re_cri" : [-20,-16]
+}
+
+const FEUILLE_PRINTEMPS_JET : Dictionary = {
+	"vi" : [41,70],
+	"cha" : [31,50],
+	"age" : [31,50],
+	"PA" : [1,1],
+	"PO" : [1,2],
+	"do" : [6,10],
+	"prospe" : [11,15],
+	"re_per_feu" : [3,5],
+	"re_per_eau" : [3,5]
 }
 
 const CEINTURE_BROUCE_JET : Dictionary = {

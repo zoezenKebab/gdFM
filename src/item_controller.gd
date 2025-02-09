@@ -7,13 +7,16 @@ extends Node
 @onready var b_controller = get_parent().get_node("ButtonController")
 @onready var p_controller =  get_parent().get_node("PuitController")
 @onready var puit = get_parent().get_node("FMPanel/Puit")
+
+@onready var main_theme = preload("res://themes/main_theme.tres")
 var runes_atlas = preload("res://texts/atlas_runes.png")
 
-var loaded_item_stats : Dictionary
+var loaded_item_jet : Dictionary
 
 var loaded_item_jet_theorique : Dictionary
 
 var item_weight : float = 0
+var first_line : bool = true
 
 func load_item_stats(jet : Dictionary)-> void:
 	
@@ -43,8 +46,8 @@ func load_item_stats(jet : Dictionary)-> void:
 		
 		#initialize item with random stat
 		var stat_r = randi_range(int(min_stat),int(max_stat))
-		loaded_item_stats[stat] = stat_r
-		new_line.find_child("Current").find_child("Stat").text = str(loaded_item_stats.get(stat))
+		loaded_item_jet[stat] = stat_r
+		new_line.find_child("Current").find_child("Stat").text = str(loaded_item_jet.get(stat))
 		if is_stat_neg: new_line.find_child("Current").find_child("Stat").label_settings = bad_stat
 		
 		
@@ -72,15 +75,20 @@ func load_item_stats(jet : Dictionary)-> void:
 		#await get_tree().create_timer(0.01).timeout
 		var i : int = 0
 		for rune_button in new_line.find_child("Runes").get_children():
-			
 			set_rune_icon(rune_button, stat, i)
 			i += 1
-			
-			rune_button.mouse_entered.connect(b_controller.white_flash.bind(rune_button, true))
-			rune_button.mouse_exited.connect(b_controller.white_flash.bind(rune_button, false))
-			rune_button.pressed.connect(b_controller.confirm_click.bind(rune_button))
-	
+		if first_line:
+			new_line.set_meta("light", true)
+			new_line.get_child(0).add_theme_stylebox_override("panel",main_theme.get_stylebox("panel_2","Line"))
+			first_line = false
+		else:
+			new_line.set_meta("light", false)
+			first_line = true
 	update_total_weight()
+	get_parent().get_child(0).find_child("Runes").get_child(0).show()
+	get_parent().get_child(0).find_child("Historique").show()
+	get_parent().get_child(0).find_child("ExoButtons").show()
+	get_parent().get_child(0).find_child("Menu").show()
 
 func update_total_weight()-> void:
 	#displays the curent weight of the item
@@ -103,7 +111,7 @@ func get_line_weight(stat : String, is_max : bool) -> float:
 	#weight of a single rune
 	var rune_weight : int = globals.STATS_TABLE.get(stat)[1]
 	#the stat currently being modified
-	var current_stat = loaded_item_stats.get(stat) if !is_max else loaded_item_jet_theorique[stat][1]
+	var current_stat = loaded_item_jet.get(stat) if !is_max else loaded_item_jet_theorique[stat][1]
 	var total_line_weight : float = 0
 	
 	
@@ -116,7 +124,7 @@ func get_line_weight(stat : String, is_max : bool) -> float:
 	#TODO : what if negative and special ???
 	
 	#negative stat case
-	if loaded_item_stats.get(stat) < 0:
+	if loaded_item_jet.get(stat) < 0:
 		
 		#TODO : need to handle negative stat to 0 and up
 		
@@ -143,14 +151,14 @@ func get_line_weight(stat : String, is_max : bool) -> float:
 
 
 func reset_loaded_item_jet()-> void:
-	if loaded_item_stats.is_empty(): return 
+	if loaded_item_jet.is_empty(): return 
 	
-	for stat_line in loaded_item_stats:
+	for stat_line in loaded_item_jet:
 		var new_stat = randi_range(loaded_item_jet_theorique.get(stat_line)[0],loaded_item_jet_theorique.get(stat_line)[1])
-		loaded_item_stats[stat_line] = new_stat
+		loaded_item_jet[stat_line] = new_stat
 		for line_hud in space.get_children():
 			if line_hud.get_meta("stat_name") == stat_line:
-				line_hud.find_child("Current").find_child("Stat").text = str(loaded_item_stats[stat_line])
+				line_hud.find_child("Current").find_child("Stat").text = str(loaded_item_jet[stat_line])
 				b_controller.change_line_color(line_hud, 0.0)
 				b_controller.reset_previous_click()
 				b_controller.delete_historique()
@@ -160,7 +168,7 @@ func reset_loaded_item_jet()-> void:
 func reset_buttons()-> void:
 	if space.get_child_count() == 0: return
 	b_controller.last_change = []
-	loaded_item_stats = {}
+	loaded_item_jet = {}
 	b_controller.delete_historique()
 	p_controller.reliquat = 0
 	for child in space.get_children():
